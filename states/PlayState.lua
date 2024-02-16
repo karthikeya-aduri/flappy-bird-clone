@@ -45,7 +45,7 @@ function PlayState:update(dt)
         end
     end
 
-    if self.bird.y > VIRTUAL_HEIGHT-15 or self.bird.y < -BIRD_WIDTH then
+    if self.bird.y > VIRTUAL_HEIGHT-15 or self.bird.y < -BIRD_HEIGHT then
         GstateMachine:change('title')
     end
 end
