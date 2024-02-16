@@ -32,6 +32,8 @@ local lastY = -PIPE_HEIGHT + math.random(80) + 20
 
 local timerReset = 2
 
+local scrolling = true
+
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     love.window.setTitle('Flappy Bird Clone')
@@ -59,28 +61,43 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-    backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED*dt) % BACKGROUND_LOOPING_POINT
-    groundScroll = (groundScroll + GROUND_SCROLL_SPEED*dt) % GROUND_LOOPING_POINT
+    if scrolling then
+        backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED*dt) % BACKGROUND_LOOPING_POINT
+        groundScroll = (groundScroll + GROUND_SCROLL_SPEED*dt) % GROUND_LOOPING_POINT
 
-    spawnTimer = spawnTimer + dt
+        spawnTimer = spawnTimer + dt
 
-    if spawnTimer>timerReset then
-        timerReset = math.random(2, 3)
-        local y = math.max(-PIPE_HEIGHT+10, math.min(lastY+math.random(-20, 20), VIRTUAL_HEIGHT-90-PIPE_HEIGHT))
-        lastY = y;
-        table.insert(pipePairs, PipePair(y))
-        spawnTimer = 0
-    end
+        if spawnTimer>timerReset then
+            timerReset = math.random(2, 3)
+            local y = math.max(-PIPE_HEIGHT+10, math.min(lastY+math.random(-20, 20), VIRTUAL_HEIGHT-90-PIPE_HEIGHT))
+            lastY = y;
+            table.insert(pipePairs, PipePair(y))
+            spawnTimer = 0
+        end
 
-    bird:update(dt)
+        bird:update(dt)
 
-    for k, pair in pairs(pipePairs) do
-        pair:update(dt)
-    end
+        for k, pair in pairs(pipePairs) do
+            pair:update(dt)
+            for l, pipe in pairs(pair.pipes) do
+                if bird:collides(pipe) then
+                    scrolling = false
+                end
+            end
 
-    for k, pair in pairs(pipePairs) do
-        if pair.remove then
-            table.remove(pipePairs, k)
+            if pair.x < -PIPE_WIDTH then
+                pair.remove()
+            end
+        end
+
+        for k, pair in pairs(pipePairs) do
+            if pair.remove then
+                table.remove(pipePairs, k)
+            end
+        end
+
+        if (bird.y > (VIRTUAL_HEIGHT-16-bird.height) or bird.y<0) then
+            scrolling = false
         end
     end
 
