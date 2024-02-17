@@ -7,13 +7,13 @@ PIPE_HEIGHT = 288
 BIRD_WIDTH = 38
 BIRD_HEIGHT = 24
 
-function PlayState:init()
-    self.bird = Bird()
-    self.pipePairs = {}
-    self.timer = 0
-    self.score = 0
+function PlayState:enter(params)
+    self.bird = params.bird
+    self.pipePairs = params.pipePairs
+    self.timer = params.timer
+    self.score = params.score
     self.resetTime = 2
-    self.lastY = -PIPE_HEIGHT + math.random(80) + 20
+    self.lastY = params.lastY
 end
 
 function PlayState:update(dt)
@@ -61,6 +61,22 @@ function PlayState:update(dt)
         Sounds['explosion']:play()
         Sounds['hit']:play()
         Scrolling = false
+    end
+
+    if love.keyboard.wasPressed('r') then
+        Scrolling = false
+        GstateMachine:change('reset')
+    end
+
+    if love.keyboard.wasPressed('p') then
+        Scrolling = false
+        GstateMachine:change('pause',{
+            bird = self.bird,
+            pipePairs = self.pipePairs,
+            timer = self.timer,
+            score = self.score,
+            lastY = self.lastY
+        })
     end
 end
 

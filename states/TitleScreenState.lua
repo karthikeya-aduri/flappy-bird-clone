@@ -12,5 +12,6 @@ function TitleScreenState:render()
 
     love.graphics.setFont(MediumFont)
     love.graphics.printf({{0, 0, 0}, 'Press Enter to play'}, 0, 100, VIRTUAL_WIDTH, 'center')
-    love.graphics.printf({{0, 0, 0}, 'Contols: Esc=Exit, Space=Jump'}, 0, 126, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf({{0, 0, 0}, 'Contols: Esc=Exit, Space=Jump,'}, 0, 160, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf({{0, 0, 0}, '         r=Restart, p=Pause.'}, 0, 186, VIRTUAL_WIDTH, 'center')
 end

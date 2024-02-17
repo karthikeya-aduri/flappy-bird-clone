@@ -10,6 +10,8 @@ require('states.BaseState')
 require('states.TitleScreenState')
 require('states.CountdownState')
 require('states.PlayState')
+require('states.PauseState')
+require('states.ResetState')
 require('states.GameOverState')
 
 WINDOW_WIDTH = 800
@@ -65,6 +67,8 @@ function love.load()
         ['title'] = function() return TitleScreenState() end,
         ['countdown'] = function() return CountdownState() end,
         ['play'] = function() return PlayState() end,
+        ['pause'] = function() return PauseState() end,
+        ['reset'] = function() return ResetState() end,
         ['over'] = function() return GameOverState() end,
     }
     GstateMachine:change('title')

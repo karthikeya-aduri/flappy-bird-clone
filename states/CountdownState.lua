@@ -13,7 +13,13 @@ function CountdownState:update(dt)
         self.timer = self.timer % COUNTDOWN_TIME
         self.count = self.count - 1
         if self.count==0 then
-            GstateMachine:change('play')
+            GstateMachine:change('play',{
+                bird = Bird(),
+                pipePairs = {},
+                timer = 0,
+                score = 0,
+                lastY = -PIPE_HEIGHT + math.random(80) + 20
+            })
         end
     end
 end
