@@ -6,6 +6,7 @@ end
 
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        Scrolling = true
         GstateMachine:change('countdown')
     end
 end

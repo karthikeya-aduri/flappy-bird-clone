@@ -30,7 +30,7 @@ local GROUND_SCROLL_SPEED = 60
 local BACKGROUND_LOOPING_POINT = 413
 local GROUND_LOOPING_POINT = 514
 
-local scrolling = true
+Scrolling = true
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -41,6 +41,19 @@ function love.load()
     MediumFont = love.graphics.newFont('fonts/flap.ttf', 14)
     FlappyFont = love.graphics.newFont('fonts/flap.ttf', 28)
     love.graphics.setFont(FlappyFont)
+
+    Sounds = {
+        ['jump'] = love.audio.newSource('assets/sounds/jump.wav', 'static'),
+        ['explosion'] = love.audio.newSource('assets/sounds/explosion.wav', 'static'),
+        ['score'] = love.audio.newSource('assets/sounds/score.wav', 'static'),
+        ['hit'] = love.audio.newSource('assets/sounds/hit.wav', 'static'),
+
+        --https://freesound.org/people/neolein/sounds/417974/
+        ['music'] = love.audio.newSource('assets/sounds/spring-theme.wav', 'static')
+    }
+
+    Sounds['music']:setLooping(true)
+    Sounds['music']:play()
 
     Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,
@@ -75,11 +88,11 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-    backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
-    groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % GROUND_LOOPING_POINT
-
+    if Scrolling then
+        backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
+        groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % GROUND_LOOPING_POINT
+    end
     GstateMachine:update(dt)
-
     love.keyboard.keysPressed = {}
 end
 
