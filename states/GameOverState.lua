@@ -6,7 +6,7 @@ end
 
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        GstateMachine:change('play')
+        GstateMachine:change('countdown')
     end
 end
 

@@ -8,6 +8,7 @@ require('classes.PipePair')
 require('classes.StateMachine')
 require('states.BaseState')
 require('states.TitleScreenState')
+require('states.CountdownState')
 require('states.PlayState')
 require('states.GameOverState')
 
@@ -49,6 +50,7 @@ function love.load()
 
     GstateMachine = StateMachine{
         ['title'] = function() return TitleScreenState() end,
+        ['countdown'] = function() return CountdownState() end,
         ['play'] = function() return PlayState() end,
         ['over'] = function() return GameOverState() end,
     }
