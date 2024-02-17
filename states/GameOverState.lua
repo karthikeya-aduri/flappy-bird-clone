@@ -16,5 +16,5 @@ function GameOverState:render()
 
     love.graphics.setFont(MediumFont)
     love.graphics.printf({{0, 0, 0}, 'Score : '..tostring(self.score)}, 0, 100, VIRTUAL_WIDTH, 'center')
-    love.graphics.printf({{0, 0, 0}, 'Press enter to play again'}, 0, 140, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf({{0, 0, 0}, 'Press Enter to play again, Esc to quit the game'}, 0, 140, VIRTUAL_WIDTH, 'center')
 end

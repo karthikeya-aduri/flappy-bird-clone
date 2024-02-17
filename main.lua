@@ -58,7 +58,7 @@ function love.load()
 end
 
 function love.resize(w, h)
-    Push:resize(w,h)
+    Push:resize(w, h)
 end
 
 function love.keypressed(key)
