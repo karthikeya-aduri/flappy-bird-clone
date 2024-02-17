@@ -9,6 +9,7 @@ require('classes.StateMachine')
 require('states.BaseState')
 require('states.TitleScreenState')
 require('states.PlayState')
+require('states.GameOverState')
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
@@ -38,7 +39,6 @@ function love.load()
     SmallFont = love.graphics.newFont('fonts/base.ttf', 8)
     MediumFont = love.graphics.newFont('fonts/flap.ttf', 14)
     FlappyFont = love.graphics.newFont('fonts/flap.ttf', 28)
-    HugeFont = love.graphics.newFont('fonts/flap.ttf', 56)
     love.graphics.setFont(FlappyFont)
 
     Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -50,6 +50,7 @@ function love.load()
     GstateMachine = StateMachine{
         ['title'] = function() return TitleScreenState() end,
         ['play'] = function() return PlayState() end,
+        ['over'] = function() return GameOverState() end,
     }
     GstateMachine:change('title')
 

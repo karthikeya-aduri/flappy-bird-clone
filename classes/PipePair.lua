@@ -10,6 +10,7 @@ function PipePair:init(y)
         ['lower'] = Pipe('bottom', self.y+ PIPE_HEIGHT + GAP_HEIGHT)
     }
     self.remove = false
+    self.scored = false
 end
 
 function PipePair:update(dt)
