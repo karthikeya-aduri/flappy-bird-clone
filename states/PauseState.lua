@@ -6,8 +6,7 @@ end
 
 function PauseState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        Scrolling=true
-        GstateMachine:change('play',self.params)
+        GstateMachine:change('countdown',self.params)
     end
 end
 

@@ -7,7 +7,13 @@ end
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         Scrolling = true
-        GstateMachine:change('countdown')
+        GstateMachine:change('countdown',{
+            bird = Bird(),
+            pipePairs = {},
+            timer = 0,
+            score = 0,
+            lastY = -PIPE_HEIGHT + math.random(80) + 20
+        })
     end
 end
 

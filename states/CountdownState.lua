@@ -2,9 +2,11 @@ CountdownState = Class{__includes=BaseState}
 
 COUNTDOWN_TIME = 0.75
 
-function CountdownState:init()
+function CountdownState:enter(params)
     self.count = 3
     self.timer = 0
+    self.params = params
+    Scrolling = false
 end
 
 function CountdownState:update(dt)
@@ -13,13 +15,8 @@ function CountdownState:update(dt)
         self.timer = self.timer % COUNTDOWN_TIME
         self.count = self.count - 1
         if self.count==0 then
-            GstateMachine:change('play',{
-                bird = Bird(),
-                pipePairs = {},
-                timer = 0,
-                score = 0,
-                lastY = -PIPE_HEIGHT + math.random(80) + 20
-            })
+            Scrolling = true
+            GstateMachine:change('play',self.params)
         end
     end
 end
