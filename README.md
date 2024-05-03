@@ -8,7 +8,7 @@ Run the .love file using Love2D. Install the framework from here: [Love2D](https
 ## Music
 The theme music was created by [Neolein](https://freesound.org/people/neolein/)
 
-## Usage
+## Controls
 - Space for jump
 - r for restarting the game
 - p for pausing the game
