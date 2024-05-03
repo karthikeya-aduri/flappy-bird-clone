@@ -11,6 +11,12 @@ function PauseState:update(dt)
 end
 
 function PauseState:render()
+    self.params.bird:render()
+
+    for k, pair in pairs(self.params.pipePairs) do
+        pair:render()
+    end
+
     love.graphics.setFont(FlappyFont)
     love.graphics.printf({{0, 0, 0}, 'PAUSED.'}, 0, 64, VIRTUAL_WIDTH, 'center')
 

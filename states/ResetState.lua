@@ -8,6 +8,7 @@ function ResetState:update(dt)
             pipePairs = {},
             timer = 0,
             score = 0,
+            state = 0,
             lastY = -PIPE_HEIGHT + math.random(80) + 20
         })
     end

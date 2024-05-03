@@ -16,12 +16,20 @@ function CountdownState:update(dt)
         self.count = self.count - 1
         if self.count==0 then
             Scrolling = true
+            self.params.state = 1
             GstateMachine:change('play',self.params)
         end
     end
 end
 
 function CountdownState:render()
+    if (self.params.state~=0) then
+       self.params.bird:render()
+        for k, pair in pairs(self.params.pipePairs) do
+            pair:render()
+        end
+    end
+
     love.graphics.setFont(FlappyFont)
     love.graphics.printf({{0, 0, 0}, tostring(self.count)}, 0, 120, VIRTUAL_WIDTH, 'center')
 end
